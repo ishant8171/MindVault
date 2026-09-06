@@ -19,6 +19,7 @@ from app.api.tasks import router as tasks_router
 from app.api.documents import router as documents_router
 from app.api.knowledge_graph import router as knowledge_graph_router
 from app.api.assistant import router as assistant_router
+from app.api.dashboard import router as dashboard_router
 
 from app.core.config import settings
 from app.database.base import Base, engine
@@ -42,13 +43,14 @@ app.include_router(goals_router)
 app.include_router(skills_router)
 app.include_router(knowledge_router)
 
-# Virtual Brain Phase 5 Routers
+# Virtual Brain Routers
 app.include_router(concepts_router)
 app.include_router(preferences_router)
 app.include_router(tasks_router)
 app.include_router(documents_router)
 app.include_router(knowledge_graph_router)
 app.include_router(assistant_router)
+app.include_router(dashboard_router)
 
 app.add_middleware(
     CORSMiddleware,
