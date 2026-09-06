@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - mindvault_db:/app/data
+    env_file:
+      - ./backend/.env
+    environment:
+      # Overrides .env's DATABASE_URL so the SQLite file lands in a
+      # Docker-managed volume and survives container rebuilds.
+      - DATABASE_URL=sqlite:////app/data/mindvault.db
+
+volumes:
+  mindvault_db:
