@@ -38,7 +38,7 @@ The dataset is defined in `backend/tests/test_integration_evaluation.py`.
 
 ## Measured results (automated run)
 
-- Full backend test run (including the new integration/evaluation test): 25 passed, 0 failed.
+- Full backend test run: **65 passed, 0 failed** in ~30s across 17 test modules (including unit, integration, and multi-tenant isolation tests).
 
 - Evaluation metrics observed on the controlled dataset (deterministic/mocked AI):
 	- Extraction accuracy: 1.0 (the mocked extraction endpoint returned the expected candidate)
