@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+.venv
+venv/
+
+# Env
+.env
+
+# Node
+node_modules/
+dist/
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Uploads
+uploads/
+backend/uploads/
