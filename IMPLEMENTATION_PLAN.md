@@ -77,7 +77,7 @@ The entire "Virtual Brain" intelligence layer is missing:
 | `Memory` (`memories`) | **Keep as-is** | Slot-key conflict detection is correct and tested; this handles discrete factual/preference statements where one answer wins |
 | `MemoryHistory` (`memory_history`) | **Keep as-is** | Audit trail is working and tested |
 | `MemoryConflict` (`memory_conflicts`) | **Keep as-is** | Conflict detection + resolution flow is working and tested |
-| `Goal` (`goals`) | **Extend** | Add relationship to `Task` (new table); no column changes to `goals` itself |
+| `Goal` (`goals`) | **Extend** | Add relationship to `Task` (new table) and nullable `subject_id` (FK to `subjects`), enabling Subject ↔ Goal linkage |
 | `Skill` (`skills`) | **Keep + Migrate** | Keep table and `/skills` router intact for backward compat (existing tests depend on it); migrate existing rows into new `KnowledgeConcept` table via a script; see "Skill data migration" section below |
 | `KnowledgeNode` (`knowledge_nodes`) | **Extend** | Add `CONCEPT`, `DOCUMENT`, `SUBJECT` to the `NodeType` enum; add `created_at` column via migration script |
 | `KnowledgeRelationship` (`knowledge_relationships`) | **Extend** | Add `HAS_CONCEPT`, `LINKED_TO`, `COVERS`, `EVIDENCE_FOR` to `RelationshipType` enum |
