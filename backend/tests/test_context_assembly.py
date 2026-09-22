@@ -37,6 +37,7 @@ def _create_user(db):
 
 
 def test_ai_service_raises_clear_error_without_api_key(monkeypatch):
+    monkeypatch.setattr(settings, "AI_PROVIDER", "openai")
     monkeypatch.setattr(settings, "OPENAI_API_KEY", "")
     with pytest.raises(AIProviderNotConfiguredError, match="OPENAI_API_KEY is not set"):
         generate_response("You are a helpful assistant", "Hello")

@@ -30,6 +30,8 @@ class Settings(BaseSettings):
     AI_PROVIDER: str = "openai"
     OPENAI_API_KEY: str = ""
     OPENAI_MODEL: str = "gpt-4o-mini"
+    GEMINI_API_KEY: str = ""
+    GEMINI_MODEL: str = "gemini-flash-lite-latest"
 
     # --- Storage ---
     UPLOAD_DIR: str = "uploads"

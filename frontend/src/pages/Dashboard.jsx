@@ -77,27 +77,30 @@ export default function Dashboard() {
 
       {/* Hero: Natural Language Reflection Statements */}
       <section className="dashboard-card hero-reflection-card" style={{
-        background: '#f8fafc',
-        border: '1px solid #e2e8f0',
-        borderRadius: 12,
-        padding: 20,
-        marginBottom: 20,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
+        background: 'rgba(26, 20, 58, 0.7)',
+        border: '1px solid rgba(168, 85, 247, 0.3)',
+        borderRadius: 18,
+        padding: 24,
+        marginBottom: 24,
+        backdropFilter: 'blur(16px)',
+        boxShadow: '0 20px 45px -15px rgba(5, 4, 15, 0.7), 0 0 30px -5px rgba(124, 58, 237, 0.18)'
       }}>
-        <h3 style={{ marginTop: 0, color: '#1e293b', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <h3 style={{ marginTop: 0, color: '#ffffff', display: 'flex', alignItems: 'center', gap: 10 }}>
           <span>🧠</span> What MindVault Sees In You
         </h3>
-        <ul style={{ listStyleType: 'none', paddingLeft: 0, margin: '12px 0 0 0' }}>
+        <ul style={{ listStyleType: 'none', paddingLeft: 0, margin: '14px 0 0 0' }}>
           {reflections.map((statement, idx) => (
             <li key={idx} style={{
-              padding: '10px 14px',
-              backgroundColor: '#ffffff',
-              borderRadius: 8,
-              border: '1px solid #edf2f7',
-              marginBottom: 8,
+              padding: '12px 18px',
+              backgroundColor: 'rgba(16, 12, 38, 0.65)',
+              borderRadius: 12,
+              border: '1px solid rgba(139, 92, 246, 0.22)',
+              borderLeft: '4px solid var(--coral)',
+              marginBottom: 10,
               fontSize: '1.02em',
-              lineHeight: 1.5,
-              color: '#334155'
+              lineHeight: 1.6,
+              color: '#e2e8f0',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.25)'
             }}>
               "{statement}"
             </li>
@@ -114,12 +117,14 @@ export default function Dashboard() {
 
         {/* 1. Behavioral Focus Shifts */}
         <section className="dashboard-card" style={{
-          background: '#fff',
-          border: '1px solid #e2e8f0',
-          borderRadius: 10,
-          padding: 16
+          background: 'rgba(22, 18, 48, 0.65)',
+          border: '1px solid rgba(139, 92, 246, 0.22)',
+          borderRadius: 18,
+          padding: 22,
+          backdropFilter: 'blur(16px)',
+          boxShadow: '0 20px 45px -15px rgba(5, 4, 15, 0.7)'
         }}>
-          <h3 style={{ marginTop: 0, fontSize: '1.1em', color: '#1e293b' }}>
+          <h3 style={{ marginTop: 0, fontSize: '1.1em', color: '#ffffff' }}>
             📊 Recent Focus Shift (14-Day Window)
           </h3>
           <p className="muted" style={{ fontSize: '0.85em', marginTop: -4 }}>
@@ -130,23 +135,34 @@ export default function Dashboard() {
               No focus shifts detected yet. Engage with tasks, questions, or notes to reveal patterns.
             </div>
           ) : (
-            <div style={{ marginTop: 10 }}>
+            <div style={{ marginTop: 12 }}>
               {currentFocus.shifts.map((shift, idx) => (
                 <div key={idx} style={{
-                  padding: '8px 10px',
-                  background: shift.share_change > 0 ? '#f0fdf4' : '#f8fafc',
-                  border: '1px solid ' + (shift.share_change > 0 ? '#bbf7d0' : '#e2e8f0'),
-                  borderRadius: 6,
-                  marginBottom: 8,
-                  fontSize: '0.9em'
+                  padding: '12px 14px',
+                  background: shift.share_change > 0 ? 'rgba(16, 185, 129, 0.08)' : 'rgba(18, 14, 42, 0.6)',
+                  border: '1px solid ' + (shift.share_change > 0 ? 'rgba(16, 185, 129, 0.3)' : 'rgba(139, 92, 246, 0.2)'),
+                  borderRadius: 12,
+                  marginBottom: 10,
+                  fontSize: '0.9em',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)'
                 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 600 }}>
-                    <span>{shift.concept_name}</span>
-                    <span style={{ color: shift.share_change > 0 ? '#16a34a' : '#64748b' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 600 }}>
+                    <span style={{ color: '#ffffff', fontSize: '0.95em' }}>{shift.concept_name}</span>
+                    <span style={{
+                      background: shift.share_change > 0 ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+                      color: shift.share_change > 0 ? '#34d399' : 'var(--muted)',
+                      border: '1px solid ' + (shift.share_change > 0 ? 'rgba(16, 185, 129, 0.4)' : 'rgba(255, 255, 255, 0.1)'),
+                      padding: '3px 10px',
+                      borderRadius: 9999,
+                      fontSize: '0.8em',
+                      fontWeight: 700,
+                      letterSpacing: '0.02em',
+                      boxShadow: shift.share_change > 0 ? '0 0 12px rgba(16, 185, 129, 0.25)' : 'none'
+                    }}>
                       {shift.share_change > 0 ? `+${Math.round(shift.share_change * 100)}% share` : 'Equal share'}
                     </span>
                   </div>
-                  <div style={{ fontSize: '0.82em', color: '#64748b', marginTop: 4 }}>
+                  <div style={{ fontSize: '0.82em', color: 'var(--muted)', marginTop: 6, borderTop: '1px solid rgba(255, 255, 255, 0.06)', paddingTop: 6 }}>
                     Recent signals: {shift.recent_count} ({Math.round(shift.recent_share * 100)}%) vs Earlier: {shift.earlier_count} ({Math.round(shift.earlier_share * 100)}%)
                   </div>
                 </div>
@@ -157,12 +173,14 @@ export default function Dashboard() {
 
         {/* 2. Rising Concepts */}
         <section className="dashboard-card" style={{
-          background: '#fff',
-          border: '1px solid #e2e8f0',
-          borderRadius: 10,
-          padding: 16
+          background: 'rgba(22, 18, 48, 0.65)',
+          border: '1px solid rgba(139, 92, 246, 0.22)',
+          borderRadius: 18,
+          padding: 22,
+          backdropFilter: 'blur(16px)',
+          boxShadow: '0 20px 45px -15px rgba(5, 4, 15, 0.7)'
         }}>
-          <h3 style={{ marginTop: 0, fontSize: '1.1em', color: '#1e293b' }}>
+          <h3 style={{ marginTop: 0, fontSize: '1.1em', color: '#ffffff' }}>
             🚀 Rising Concepts (Growing Confidence)
           </h3>
           <p className="muted" style={{ fontSize: '0.85em', marginTop: -4 }}>
@@ -173,35 +191,41 @@ export default function Dashboard() {
               No rising concepts flagged yet. Complete tasks or chat with the assistant to build confidence.
             </div>
           ) : (
-            <div style={{ marginTop: 10 }}>
+            <div style={{ marginTop: 12 }}>
               {risingConcepts.map(c => (
                 <div key={c.id} style={{
-                  padding: '8px 12px',
-                  background: '#f8fafc',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: 6,
-                  marginBottom: 8
+                  padding: '14px 16px',
+                  background: 'rgba(18, 14, 42, 0.65)',
+                  border: '1px solid rgba(139, 92, 246, 0.25)',
+                  borderRadius: 14,
+                  marginBottom: 12,
+                  boxShadow: '0 6px 20px rgba(0, 0, 0, 0.25)'
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <strong style={{ fontSize: '0.95em' }}>{c.name}</strong>
+                    <strong style={{ fontSize: '1.02em', color: '#ffffff', fontFamily: "'Space Grotesk', sans-serif" }}>{c.name}</strong>
                     <span style={{
-                      background: '#dcfce7',
-                      color: '#15803d',
-                      padding: '2px 8px',
-                      borderRadius: 12,
+                      background: 'rgba(255, 107, 74, 0.18)',
+                      color: 'var(--coral)',
+                      border: '1px solid rgba(255, 107, 74, 0.4)',
+                      padding: '3px 10px',
+                      borderRadius: 9999,
                       fontSize: '0.78em',
-                      fontWeight: 600
+                      fontWeight: 700,
+                      letterSpacing: '0.02em',
+                      boxShadow: '0 0 12px var(--coral-glow)'
                     }}>
                       +{Math.round(c.confidence_gain * 100)}% gain
                     </span>
                   </div>
-                  <div style={{ marginTop: 6 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78em', color: '#64748b', marginBottom: 2 }}>
-                      <span>Confidence</span>
-                      <span>{Math.round(c.current_confidence * 100)}%</span>
+                  <div style={{ marginTop: 10 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 6 }}>
+                      <span style={{ fontSize: '0.74em', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', fontWeight: 600 }}>Confidence</span>
+                      <span style={{ fontSize: '1.45rem', fontWeight: 800, fontFamily: "'Space Grotesk', sans-serif", color: '#ffffff', lineHeight: 1 }}>
+                        {Math.round(c.current_confidence * 100)}<span style={{ fontSize: '0.9rem', color: 'var(--coral)' }}>%</span>
+                      </span>
                     </div>
-                    <div style={{ background: '#e2e8f0', borderRadius: 4, height: 6, overflow: 'hidden' }}>
-                      <div style={{ background: '#22c55e', width: `${Math.min(100, Math.round(c.current_confidence * 100))}%`, height: '100%' }} />
+                    <div style={{ background: 'rgba(15, 12, 33, 0.8)', borderRadius: 9999, height: 7, overflow: 'hidden', border: '1px solid rgba(139, 92, 246, 0.2)' }}>
+                      <div style={{ background: 'linear-gradient(90deg, #8b5cf6 0%, var(--coral) 100%)', width: `${Math.min(100, Math.round(c.current_confidence * 100))}%`, height: '100%', borderRadius: 9999, boxShadow: '0 0 10px var(--coral-glow)' }} />
                     </div>
                   </div>
                 </div>
@@ -212,37 +236,50 @@ export default function Dashboard() {
 
         {/* 3. Stagnant / Struggling Concepts */}
         <section className="dashboard-card" style={{
-          background: '#fff',
-          border: '1px solid #e2e8f0',
-          borderRadius: 10,
-          padding: 16
+          background: 'rgba(22, 18, 48, 0.65)',
+          border: '1px solid rgba(245, 158, 11, 0.25)',
+          borderRadius: 18,
+          padding: 22,
+          backdropFilter: 'blur(16px)',
+          boxShadow: '0 20px 45px -15px rgba(5, 4, 15, 0.7)'
         }}>
-          <h3 style={{ marginTop: 0, fontSize: '1.1em', color: '#1e293b' }}>
+          <h3 style={{ marginTop: 0, fontSize: '1.1em', color: '#ffffff' }}>
             ⚠️ Active Difficulty Areas
           </h3>
           <p className="muted" style={{ fontSize: '0.85em', marginTop: -4 }}>
             Topics with repeated practice attempts whose confidence hasn't consolidated yet.
           </p>
           {strugglingConcepts.length === 0 ? (
-            <div className="empty-state" style={{ padding: '16px 0', fontSize: '0.9em', color: '#16a34a' }}>
+            <div className="empty-state" style={{ padding: '16px 0', fontSize: '0.9em', color: '#34d399' }}>
               ✓ No persistent struggle areas detected.
             </div>
           ) : (
-            <div style={{ marginTop: 10 }}>
+            <div style={{ marginTop: 12 }}>
               {strugglingConcepts.map(c => (
                 <div key={c.id} style={{
-                  padding: '8px 12px',
-                  background: '#fff7ed',
-                  border: '1px solid #fed7aa',
-                  borderRadius: 6,
-                  marginBottom: 8
+                  padding: '12px 14px',
+                  background: 'rgba(245, 158, 11, 0.08)',
+                  border: '1px solid rgba(245, 158, 11, 0.28)',
+                  borderRadius: 12,
+                  marginBottom: 10,
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)'
                 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 600, color: '#c2410c' }}>
-                    <span>{c.name}</span>
-                    <span style={{ fontSize: '0.82em' }}>{c.evidence_count} attempts</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 600 }}>
+                    <span style={{ color: '#fef3c7', fontSize: '0.95em' }}>{c.name}</span>
+                    <span style={{
+                      background: 'rgba(245, 158, 11, 0.2)',
+                      color: '#fbbf24',
+                      border: '1px solid rgba(245, 158, 11, 0.4)',
+                      padding: '3px 10px',
+                      borderRadius: 9999,
+                      fontSize: '0.78em',
+                      fontWeight: 700
+                    }}>
+                      {c.evidence_count} attempts
+                    </span>
                   </div>
-                  <div style={{ fontSize: '0.82em', color: '#7c2d12', marginTop: 4 }}>
-                    Confidence currently {Math.round(c.confidence * 100)}% — assistant will adapt explanations for this gap.
+                  <div style={{ fontSize: '0.82em', color: '#fde68a', marginTop: 6, lineHeight: 1.5 }}>
+                    Confidence currently <strong style={{ color: '#ffffff' }}>{Math.round(c.confidence * 100)}%</strong> — assistant will adapt explanations for this gap.
                   </div>
                 </div>
               ))}
@@ -252,12 +289,14 @@ export default function Dashboard() {
 
         {/* 4. Active Inferred Learning Preferences */}
         <section className="dashboard-card" style={{
-          background: '#fff',
-          border: '1px solid #e2e8f0',
-          borderRadius: 10,
-          padding: 16
+          background: 'rgba(22, 18, 48, 0.65)',
+          border: '1px solid rgba(139, 92, 246, 0.22)',
+          borderRadius: 18,
+          padding: 22,
+          backdropFilter: 'blur(16px)',
+          boxShadow: '0 20px 45px -15px rgba(5, 4, 15, 0.7)'
         }}>
-          <h3 style={{ marginTop: 0, fontSize: '1.1em', color: '#1e293b' }}>
+          <h3 style={{ marginTop: 0, fontSize: '1.1em', color: '#ffffff' }}>
             🎯 Calibrated Learning Styles
           </h3>
           <p className="muted" style={{ fontSize: '0.85em', marginTop: -4 }}>
@@ -268,22 +307,23 @@ export default function Dashboard() {
               No preferences calibrated yet. Tell the assistant how you learn best or add preferences.
             </div>
           ) : (
-            <div style={{ marginTop: 10, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            <div style={{ marginTop: 14, display: 'flex', flexWrap: 'wrap', gap: 10 }}>
               {activePrefs.map(p => (
                 <div key={p.id} style={{
-                  padding: '6px 12px',
-                  background: '#f1f5f9',
-                  border: '1px solid #cbd5e1',
-                  borderRadius: 20,
+                  padding: '8px 14px',
+                  background: 'rgba(30, 24, 66, 0.7)',
+                  border: '1px solid rgba(168, 85, 247, 0.35)',
+                  borderRadius: 9999,
                   fontSize: '0.85em',
-                  color: '#1e293b',
+                  color: '#ffffff',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 6
+                  gap: 8,
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)'
                 }}>
                   <span>💡</span>
-                  <span>{p.preference_type.replace(/_/g, ' ')}</span>
-                  <span style={{ fontSize: '0.75em', color: '#64748b', fontWeight: 600 }}>
+                  <span style={{ fontWeight: 600 }}>{p.preference_type.replace(/_/g, ' ')}</span>
+                  <span style={{ fontSize: '0.78em', color: 'var(--coral)', fontWeight: 700 }}>
                     ({Math.round(p.confidence * 100)}% match)
                   </span>
                 </div>
@@ -294,36 +334,49 @@ export default function Dashboard() {
 
         {/* 5. Goals Needing Attention */}
         <section className="dashboard-card" style={{
-          background: '#fff',
-          border: '1px solid #e2e8f0',
-          borderRadius: 10,
-          padding: 16
+          background: 'rgba(22, 18, 48, 0.65)',
+          border: '1px solid rgba(239, 68, 68, 0.25)',
+          borderRadius: 18,
+          padding: 22,
+          backdropFilter: 'blur(16px)',
+          boxShadow: '0 20px 45px -15px rgba(5, 4, 15, 0.7)'
         }}>
-          <h3 style={{ marginTop: 0, fontSize: '1.1em', color: '#1e293b' }}>
+          <h3 style={{ marginTop: 0, fontSize: '1.1em', color: '#ffffff' }}>
             ⏳ Goals Needing Attention
           </h3>
           <p className="muted" style={{ fontSize: '0.85em', marginTop: -4 }}>
             Goals with upcoming deadlines or low progress requiring focus.
           </p>
           {goalsNeedingAttention.length === 0 ? (
-            <div className="empty-state" style={{ padding: '16px 0', fontSize: '0.9em', color: '#16a34a' }}>
+            <div className="empty-state" style={{ padding: '16px 0', fontSize: '0.9em', color: '#34d399' }}>
               ✓ All active goals are on schedule.
             </div>
           ) : (
-            <div style={{ marginTop: 10 }}>
+            <div style={{ marginTop: 12 }}>
               {goalsNeedingAttention.map(g => (
                 <div key={g.id} style={{
-                  padding: '8px 12px',
-                  background: '#fef2f2',
-                  border: '1px solid #fecaca',
-                  borderRadius: 6,
-                  marginBottom: 8
+                  padding: '12px 14px',
+                  background: 'rgba(239, 68, 68, 0.08)',
+                  border: '1px solid rgba(239, 68, 68, 0.28)',
+                  borderRadius: 12,
+                  marginBottom: 10,
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)'
                 }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 600, color: '#991b1b' }}>
-                    <span>{g.title}</span>
-                    <span style={{ fontSize: '0.82em' }}>{Math.round((g.progress || 0) * 100)}%</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 600 }}>
+                    <span style={{ color: '#fecaca', fontSize: '0.95em' }}>{g.title}</span>
+                    <span style={{
+                      background: 'rgba(239, 68, 68, 0.2)',
+                      color: '#fca5a5',
+                      border: '1px solid rgba(239, 68, 68, 0.4)',
+                      padding: '3px 10px',
+                      borderRadius: 9999,
+                      fontSize: '0.8em',
+                      fontWeight: 700
+                    }}>
+                      {Math.round((g.progress || 0) * 100)}%
+                    </span>
                   </div>
-                  <div style={{ fontSize: '0.8em', color: '#b91c1c', marginTop: 4 }}>
+                  <div style={{ fontSize: '0.82em', color: '#fca5a5', marginTop: 6 }}>
                     {g.reasons.join(' · ')}
                   </div>
                 </div>
@@ -337,20 +390,22 @@ export default function Dashboard() {
       {/* Knowledge Graph View */}
       <section className="dashboard-card graph-card" style={{
         marginTop: 24,
-        background: '#fff',
-        border: '1px solid #e2e8f0',
-        borderRadius: 10,
-        padding: 16
+        background: 'rgba(22, 18, 48, 0.65)',
+        border: '1px solid rgba(139, 92, 246, 0.22)',
+        borderRadius: 18,
+        padding: 24,
+        backdropFilter: 'blur(16px)',
+        boxShadow: '0 20px 45px -15px rgba(5, 4, 15, 0.7)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <h3 style={{ margin: 0, fontSize: '1.1em' }}>Personal Knowledge Graph</h3>
-            <p className="muted" style={{ fontSize: '0.85em', margin: 0 }}>
+            <h3 style={{ margin: 0, fontSize: '1.15em', color: '#ffffff' }}>Personal Knowledge Graph</h3>
+            <p className="muted" style={{ fontSize: '0.85em', margin: '4px 0 0 0' }}>
               Nodes ({nodes.length}) and edges ({rels.length}) linking concepts, subjects, goals, and documents.
             </p>
           </div>
         </div>
-        <div className="graph-container" style={{ height: 350, marginTop: 12 }}>
+        <div className="graph-container" style={{ height: 380, marginTop: 14 }}>
           <GraphView nodes={nodes} relationships={rels} />
         </div>
       </section>

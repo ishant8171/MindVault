@@ -22,5 +22,17 @@ export default function GraphView({ nodes = [], relationships = [] }){
     if(fgRef.current) fgRef.current.d3Force('charge').strength(-100)
   },[])
 
-  return <ForceGraph2D ref={fgRef} graphData={data} nodeLabel={n=>n.name} linkDirectionalArrowLength={4} linkDirectionalArrowRelPos={1} />
+  return (
+    <ForceGraph2D
+      ref={fgRef}
+      graphData={data}
+      nodeLabel={n => n.name}
+      nodeColor={n => n.group === 'concept' ? '#ff6b4a' : n.group === 'goal' ? '#8b5cf6' : n.group === 'document' ? '#2dd4bf' : '#38bdf8'}
+      linkColor={() => 'rgba(139, 92, 246, 0.35)'}
+      linkDirectionalArrowLength={4}
+      linkDirectionalArrowRelPos={1}
+      linkDirectionalArrowColor={() => '#ff8c42'}
+      backgroundColor="rgba(0, 0, 0, 0)"
+    />
+  )
 }
