@@ -52,13 +52,23 @@ app.include_router(knowledge_graph_router)
 app.include_router(assistant_router)
 app.include_router(dashboard_router)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[settings.FRONTEND_ORIGIN],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+origins = [origin.strip() for origin in settings.FRONTEND_ORIGIN.split(",") if origin.strip()]
+if "*" in origins or settings.FRONTEND_ORIGIN == "*":
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=False,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+else:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 
 @app.get("/health")
